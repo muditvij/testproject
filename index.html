@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shh! It's Hot 🔥</title>
+    <title>Welcome</title>
     <link rel="icon" type="image/png" href="image.png">
     <style>
         * {
@@ -14,21 +14,36 @@
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #ff0844, #ffb199);
+            text-align: center;
+            color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow-x: hidden;
+            padding-top: 80px;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            animation: blink 1s infinite alternate;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .logo {
+            width: 200px;
+            height: auto;
         }
         .main-content {
             display: none;
             width: 100%;
             position: relative;
             z-index: 1;
-            padding-top: 80px;
         }
         .navbar {
             display: flex;
@@ -44,17 +59,11 @@
             transition: top 0.5s ease-in-out;
         }
         .navbar.hidden {
-            top: -100px;
+            top: -80px;
         }
-        .navbar .logo-text img {
+        .navbar .logo {
             width: 100px;
             height: auto;
-        }
-        .menu-toggle {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
         }
         .nav-links {
             list-style: none;
@@ -72,9 +81,37 @@
         .nav-links a:hover {
             color: #ffcc00;
         }
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.9);
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+        }
         .content {
-            margin-top: 50px;
-            padding: 20px;
+            margin-top: 100px;
+            text-align: center;
+            max-width: 80%;
         }
         h1 {
             font-size: 48px;
@@ -103,27 +140,6 @@
             font-size: 14px;
             color: #ffcc00;
         }
-        @media screen and (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                background-color: rgba(0, 0, 0, 0.9);
-                width: 100%;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                text-align: center;
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links li {
-                margin: 10px 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -133,9 +149,7 @@
 
     <div class="main-content" id="mainContent">
         <nav class="navbar" id="navbar">
-            <div class="logo-text">
-                <img src="image2.png" alt="Logo">
-            </div>
+            <img src="image.png" alt="Logo" class="logo">
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#">Today's Special</a></li>
@@ -146,7 +160,7 @@
         </nav>
         
         <div class="content">
-            <h1>Don't just be in your room!</h1>
+            <h1>Shh! It's hot 🔥</h1>
             <h2>Join us, step to a new world!</h2>
             <button class="cta-button">Step in</button>
             <p class="warning">⚠️ Don't click if you are under 18</p>
@@ -166,14 +180,14 @@
         let lastScrollTop = 0;
         window.addEventListener("scroll", function() {
             let navbar = document.getElementById("navbar");
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScroll > lastScrollTop) {
                 navbar.classList.add("hidden");
             } else {
                 navbar.classList.remove("hidden");
             }
-            lastScrollTop = scrollTop;
-        });
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }, false);
     </script>
 </body>
 </html>
