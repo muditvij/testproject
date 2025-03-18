@@ -575,6 +575,12 @@
             width: 100px;
             height: auto;
         }
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
         .nav-links {
             list-style: none;
             display: flex;
@@ -621,6 +627,28 @@
             font-size: 14px;
             color: #ffcc00;
         }
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #333;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                padding: 10px 0;
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -655,7 +683,7 @@
             document.getElementById('logoContainer').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
             document.body.style.backgroundColor = '#fff';
-        }, 5000);
+        }, 3000);
 
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
