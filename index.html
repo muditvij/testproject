@@ -3,83 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Shh! It's spicy</title>
     <link rel="icon" type="image/png" href="image.png">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
     <style>
-        * {
+        body {
+            background: linear-gradient(to bottom, #000, #6a0d0d);
+            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ff0844, #ffb199);
-            text-align: center;
-            color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding-top: 80px;
-        }
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
-            background-color: black;
-            animation: blink 1s infinite alternate;
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-        .logo {
-            width: 200px;
-            height: auto;
-        }
-        .main-content {
-            display: none;
-            width: 100%;
-            position: relative;
-            z-index: 1;
+            justify-content: flex-start;
+            overflow-x: hidden;
         }
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.8);
             padding: 15px 20px;
+            background-color: #000;
+            border-bottom: 3px solid red;
             width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            transition: top 0.5s ease-in-out;
         }
-        .navbar.hidden {
-            top: -80px;
-        }
-        .navbar .logo {
-            width: 100px;
-            height: auto;
+        .logo img {
+            height: 20vh;
         }
         .nav-links {
             list-style: none;
             display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
         }
         .nav-links li {
-            margin: 0 15px;
+            display: inline;
         }
         .nav-links a {
-            color: white;
             text-decoration: none;
+            color: white;
             font-size: 18px;
+            font-weight: bold;
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #ffcc00;
+            color: red;
         }
         .menu-toggle {
             display: none;
@@ -87,107 +59,109 @@
             color: white;
             cursor: pointer;
         }
-        @media screen and (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                background-color: rgba(0, 0, 0, 0.9);
-                width: 100%;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                text-align: center;
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links li {
-                margin: 10px 0;
-            }
-        }
-        .content {
-            margin-top: 100px;
+        .hero-section {
             text-align: center;
-            max-width: 80%;
+            margin-top: 15vh;
+            max-width: 90%;
+            padding: 20px;
         }
-        h1 {
-            font-size: 48px;
+        .hero-section h1 {
+            font-size: 3rem;
             font-weight: bold;
+            text-transform: uppercase;
         }
-        h2 {
-            font-size: 24px;
-            margin: 10px 0;
+        .hero-section h2 {
+            font-size: 2rem;
+            margin-top: 10px;
+            color: #ffcc00;
         }
-        .cta-button {
-            background-color: #ff4500;
-            color: white;
-            padding: 15px 30px;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+        .hero-button {
+            display: inline-block;
             margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             transition: background 0.3s;
         }
-        .cta-button:hover {
-            background-color: #cc3700;
+        .hero-button:hover {
+            background-color: darkred;
         }
         .warning {
             margin-top: 10px;
-            font-size: 14px;
-            color: #ffcc00;
+            font-size: 1rem;
+            color: #ff0000;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 10px;
+                border-radius: 5px;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section h2 {
+                font-size: 1.5rem;
+            }
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+            .hero-button {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="logo-container" id="logoContainer">
-        <img src="image.png" alt="Logo" class="logo">
-    </div>
-
-    <div class="main-content" id="mainContent">
-        <nav class="navbar" id="navbar">
-            <img src="image.png" alt="Logo" class="logo">
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#">Today's Special</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Trending</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
-        
-        <div class="content">
-            <h1>Shh! It's hot 🔥</h1>
-            <h2>Join us, step to a new world!</h2>
-            <button class="cta-button">Step in</button>
-            <p class="warning">⚠️ Don't click if you are under 18</p>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="image.png" alt="Spicy Lund Logo">
         </div>
-    </div>
-
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Today Special</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Add My Choice</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Don't just be in your room!</h1>
+        <h2>Step into the lusty world!</h2>
+        <p>Live your life!</p>
+        <button class="hero-button">Step in</button>
+        <p class="warning">Don't click if you're under 18</p>
+    </section>
+    
     <script>
-        setTimeout(() => {
-            document.getElementById('logoContainer').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-        }, 3000);
-
         function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+            document.getElementById("navLinks").classList.toggle("show");
         }
-
-        let lastScrollTop = 0;
-        window.addEventListener("scroll", function() {
-            let navbar = document.getElementById("navbar");
-            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            if (currentScroll > lastScrollTop) {
-                navbar.classList.add("hidden");
-            } else {
-                navbar.classList.remove("hidden");
-            }
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        }, false);
     </script>
 </body>
 </html>
+
