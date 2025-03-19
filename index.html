@@ -17,9 +17,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100vh;
-            justify-content: flex-start;
             overflow-x: hidden;
+        }
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .preloader img {
+            height: 20vh;
+            animation: blink 1s infinite alternate;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .content {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
         }
         .navbar {
             display: flex;
@@ -29,6 +52,10 @@
             background-color: #000;
             border-bottom: 3px solid red;
             width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
         .logo img {
             height: 20vh;
@@ -52,12 +79,6 @@
         }
         .nav-links a:hover {
             color: red;
-        }
-        .menu-toggle {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
         }
         .hero-section {
             text-align: center;
@@ -100,68 +121,92 @@
             font-size: 1rem;
             color: #ff0000;
         }
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                right: 20px;
-                background-color: rgba(0, 0, 0, 0.9);
-                padding: 10px;
-                border-radius: 5px;
-            }
-            .nav-links.show {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-            .hero-section h2 {
-                font-size: 1.5rem;
-            }
-            .hero-section p {
-                font-size: 1.2rem;
-            }
-            .hero-button {
-                font-size: 1.2rem;
-                padding: 10px 20px;
-            }
+        .card {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .tags {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #ffcc00;
+        }
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .category-buttons button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: none;
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .category-buttons button:hover {
+            background-color: darkred;
         }
     </style>
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="image.png" alt="Spicy Lund Logo">
+<body onload="setTimeout(removePreloader, 5000)">
+    <div class="preloader">
+        <img src="image.png" alt="Spicy Lund Logo">
+    </div>
+    <div class="content">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="image.png" alt="Spicy Lund Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Today's Special</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Add My Choice</a></li>
+            </ul>
+        </nav>
+        <section class="hero-section">
+            <h1>Don't just be in your room!</h1>
+            <h2>Step into the lusty world!</h2>
+            <p>Live your life!</p>
+            <button class="hero-button">Step in</button>
+            <p class="warning">Don't click if you're under 18</p>
+        </section>
+        <div class="card">
+            <h2>Today's Special</h2>
+            <img src="nail.png" alt="Video Thumbnail">
+            <p>Title: Hot Night Adventure</p>
+            <p>Duration: 12:30</p>
+            <p>Rating: ⭐⭐⭐⭐☆</p>
+            <p class="tags">#Steamy #Hot #New</p>
         </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#">Today Special</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">Add My Choice</a></li>
-        </ul>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1>Don't just be in your room!</h1>
-        <h2>Step into the lusty world!</h2>
-        <p>Live your life!</p>
-        <button class="hero-button">Step in</button>
-        <p class="warning">Don't click if you're under 18</p>
-    </section>
-    
+        <div class="card">
+            <h2>Trending Categories 🔥</h2>
+            <div class="category-buttons">
+                <button>Teen</button>
+                <button>Lesbian</button>
+                <button>Milf</button>
+                <button>Hardcore</button>
+                <button>Asian</button>
+                <button>See All</button>
+            </div>
+        </div>
+    </div>
     <script>
-        function toggleMenu() {
-            document.getElementById("navLinks").classList.toggle("show");
+        function removePreloader() {
+            document.querySelector(".preloader").style.display = "none";
+            document.querySelector(".content").style.display = "block";
         }
     </script>
 </body>
 </html>
-
